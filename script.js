@@ -15,7 +15,7 @@ let photo3 = {
 }
 let photo4 = {
     photo: "images/varos.jpg",
-    title: "Mezo",
+    title: "Varos",
     description: "(:)"
 }
 let photo5 = {
@@ -26,7 +26,7 @@ let photo5 = {
 let photo6 = {
     photo: "images/szeged.jfif",
     title: "Szeged",
-    description: "Jovobeli celom, hogy itt lakjak"
+    description: "Szeged, mit mondjak xDDD"
 }
 let imagesData = [photo1, photo2, photo3, photo4, photo5, photo6];
 let currentPhoto = 0;
@@ -51,15 +51,27 @@ $(".leftArrow").click(() => {
 let counter = 0;
 imagesData.forEach(photo => {
     $("#thumbnails").append(
-        '<div class="container" ><img src="' + photo.photo + '" data-number="' + counter +  '" id="containerPhoto"></div>'
+        '<div class="container" id="kontener-' + counter + '"><img src="' + photo.photo + '" data-number="' + counter +  '" id="containerPhoto"><blockquote class="speech-bubble">' + photo.title + '</blockquote></div>'
     );
     counter++;
 });
+$("#kontener-0").css("transform","scale(1.5)");
 $(".container").on( "click",function (event) {
-    let photo = $(event.target).attr("data-number");
+    currentPhoto = $(event.target).attr("data-number");
+    let id = "#kontener-" + currentPhoto;
+    let id3 = "#quote-" + currentPhoto;
     
-    console.log(photo)
-    loadPhoto(Number(photo));
+    console.log(id);
+    let class2 = ".speech-bubble-" + currentPhoto;
+    loadPhoto(currentPhoto);
+    $(id).css("transform", "scale(1.5)");
+    $(class2).css("display","block");
+    for(let counter2 = 0; counter2 < imagesData.length; counter2++){
+        if(counter2 != currentPhoto){
+            let id2 = "#kontener-" + counter2;
+            $(id2).css("transform", "scale(1.0)");
+        }
+    }
 });
 
 
